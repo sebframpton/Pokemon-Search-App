@@ -1,0 +1,6 @@
+    .scrollable-container {
+      max-height: 200px; /* Or any desired height */
+      overflow-y: auto; /* or scroll */
+      border: 1px solid #ccc; /* For visual clarity */
+      padding: 10px;
+    }
