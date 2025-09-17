@@ -75,7 +75,7 @@ ul {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    max-width: 30%;
     margin: 20px auto;
     padding: 120px;
     border: 0px solid #000;
