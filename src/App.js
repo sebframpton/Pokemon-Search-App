@@ -79,7 +79,7 @@ function App() {
                 />
               </div>
 
-              <button className="search-button" onclick="searchPokemon()">
+              <button className="search-button" onKeyUp="searchPokemon()">
                 Search Pokémon
               </button>
             </div>
