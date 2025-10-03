@@ -467,3 +467,22 @@ ul {
   border-radius:25px;
   display:block;
 }
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+.pokedex {
+    display: block;
+}
+}
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+.pokedex {
+    display: block;
+    justify-content: center;
+    max-width: 100%;
+    border-radius: 20px;
+    position: relative;
+}
+}
