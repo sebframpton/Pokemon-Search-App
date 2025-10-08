@@ -485,6 +485,11 @@ body{
 }
   
 .pokedex {
-   
+       max-width: 500px;
+        justify-content: 0;
+        align-content: space-around;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: stretch;
 }
 }
