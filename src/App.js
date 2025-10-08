@@ -60,6 +60,11 @@ function App() {
     }
   };
 
+  const clearSelection = () => {
+    setSelectedPokemon(null);
+    setSearchTerm("");
+  };
+
   return (
     <div className="App">
       <header>
@@ -130,7 +135,15 @@ function App() {
               <div className="speaker-line" />
               <div className="speaker-line" />
             </div>
-            <div className="red-button" />
+            <div className="red-button-container">
+              <div 
+                className="red-button" 
+                onClick={clearSelection}
+                style={{cursor: 'pointer'}}
+                title="Clear Selection"
+              />
+              <div className="reset-label">Reset</div>
+            </div>
           </div>
 
           {/* Green section */}
