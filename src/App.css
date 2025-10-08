@@ -148,6 +148,23 @@ body {
     margin-bottom: 20px;
 }
 
+.reset-label {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.red-button-container {
+    position: relative;
+    display: inline-block;
+}
+
 .speaker {
     display: flex;
     flex-direction: column;
@@ -570,6 +587,11 @@ ul {
         border: 2px solid #8b0000;
     }
 
+    .reset-label {
+        font-size: 8px;
+        bottom: -15px;
+    }
+
     .dpad {
         width: 60px;
         height: 60px;
@@ -767,6 +789,11 @@ ul {
     .red-button {
         width: 30px;
         height: 30px;
+    }
+
+    .reset-label {
+        font-size: 7px;
+        bottom: -13px;
     }
 
     .right-screen {
