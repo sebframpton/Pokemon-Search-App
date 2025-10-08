@@ -23,173 +23,190 @@ function App() {
     setSelectedPokemon(data);
   };
 
+  const handleSearch = async () => {
+    if (!searchTerm.trim()) {
+      alert("Please enter a Pokémon name or ID");
+      return;
+    }
+
+    try {
+      // Try to fetch from PokeAPI directly by name or ID
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm.toLowerCase()}`);
+      
+      if (!response.ok) {
+        alert(`Pokémon "${searchTerm}" not found!`);
+        return;
+      }
+
+      const data = await response.json();
+      setSelectedPokemon(data);
+    } catch (error) {
+      console.error("Error searching Pokemon:", error);
+      alert("Failed to search. Please try again.");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="App">
       <header>
         <img alt="pokemon logo" className="logo" src={logo} />
       </header>
-      <>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Pokédex Interface</title>
-        <style
-         
-        />
-        <div className="pokedex">
-          {/* Left Panel */}
-          <div className="left-panel">
-            {/* Top lights */}
-            <div className="top-lights">
-              <div className="main-light" />
-              <div className="small-lights">
-                <div className="small-light red-light" />
-                <div className="small-light yellow-light" />
-                <div className="small-light green-light" />
-              </div>
-            </div>
-            {/* Main screen */}
-            <div className="main-screen">
-              <main>
-                {selectedPokemon && (
-                  <div className="pokedex">
-                    <h2>{selectedPokemon.name}</h2>
-                    <img
-                      src={selectedPokemon.sprites.front_default}
-                      alt={selectedPokemon.name}
-                    />
-
-                    {selectedPokemon.stats.map((stat, index) => (
-                      <div key={index}>
-                        <p></p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </main>
-            </div>
-            {/* Search section */}
-            <div className="search-section">
-              <div className="pokedex">
-                <input
-                  className="search-box"
-                  type="text"
-                  placeholder="Search..."
-                  value={searchTerm}
-                  onChange={(event) => setSearchTerm(event.target.value)}
-                />
-              </div>
-
-              <button className="search-button" onKeyUp="searchPokemon()">
-                Search Pokémon
-              </button>
-            </div>
-            {/* Controls */}
-            <div className="controls">
-              <div className="red-button" onclick="randomPokemon()" />
-              <div className="speaker">
-                <div className="speaker-line" />
-                <div className="speaker-line" />
-                <div className="speaker-line" />
-                <div className="speaker-line" />
-              </div>
-            </div>
-
-            {/* Green section */}
-            <div className="green-section" />
-            {/* Bottom controls */}
-            <div className="bottom-controls">
-              <div className="dpad">
-                <div
-                  className="dpad-button dpad-up"
-                  onclick="previousPokemon()"
-                />
-                <div
-                  className="dpad-button dpad-down"
-                  onclick="nextPokemon()"
-                />
-                <div
-                  className="dpad-button dpad-left"
-                  onclick="previousPokemon()"
-                />
-                <div
-                  className="dpad-button dpad-right"
-                  onclick="nextPokemon()"
-                />
-                <div className="dpad-button dpad-center" />
-              </div>
-              <div className="action-buttons">
-                <button className="action-button" />
-                <button className="action-button" />
-              </div>
+      
+      <div className="pokedex">
+        {/* Left Panel */}
+        <div className="left-panel">
+          {/* Top lights */}
+          <div className="top-lights">
+            <div className="main-light" />
+            <div className="small-lights">
+              <div className="small-light red-light" />
+              <div className="small-light yellow-light" />
+              <div className="small-light green-light" />
             </div>
           </div>
-          {/* Hinge */}
-          <div className="hinge" />
-          {/* Right Panel */}
-          <div className="right-panel">
-            {/* Right screen with Pokemon data */}
-            <div className="right-screen" id="rightScreen">
-              <main>
-                {selectedPokemon && (
-                  <div className="pokedex">
-                    <h2>{selectedPokemon.name}</h2>
-                    <img
-                      src={selectedPokemon.sprites.front_default}
-                      alt={selectedPokemon.name}
-                    />
-                    <p>Height: {selectedPokemon.height}</p>
-                    <p>Weight: {selectedPokemon.weight}</p>
 
-                    {selectedPokemon.stats.map((stat, index) => (
-                      <div key={index}>
-                        <p>
-                          {stat.stat.name}: {stat.base_stat}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </main>
-            
-            </div>
-            {/* Blue grid */}
-            <div className="blue-grid">
-              <div className="grid-cell" />
-              <div className="grid-cell" />
-              <div className="grid-cell" />
-              <div className="grid-cell" />
-              <div className="grid-cell" />
-              <div className="grid-cell" />
-              <div className="grid-cell" />
-              <div className="grid-cell" />
-              <div className="grid-cell" />
-              <div className="grid-cell" />
-            </div>
-            {/* Right controls */}
-            <div className="right-controls">
-              <div className="white-buttons">
-                <div className="white-button" />
-                <div className="white-button" />
-              </div>
-              <div className="yellow-button" />
-            </div>
-            {/* Bottom green buttons */}
-            <div className="bottom-green-buttons">
-              <div className="green-button" />
-              <div className="green-button" />
+          {/* Main screen */}
+          <div className="main-screen">
+            <div className="screen-content">
+              {selectedPokemon ? (
+                <>
+                  <img
+                    className="pokemon-image"
+                    src={selectedPokemon.sprites.front_default}
+                    alt={selectedPokemon.name}
+                  />
+                  <div className="pokemon-name">{selectedPokemon.name}</div>
+                  <div className="pokemon-id">#{selectedPokemon.id}</div>
+                </>
+              ) : (
+                <div className="pokemon-name">Select a Pokémon</div>
+              )}
             </div>
           </div>
-          <ul style={{ overflow: "scroll", width: "200px" }}>
+
+          {/* Search section */}
+          <div className="search-section">
+            <input
+              className="search-input"
+              type="text"
+              placeholder="Search Pokémon..."
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+            <button className="search-button" onClick={handleSearch}>
+              Search Pokémon
+            </button>
+          </div>
+
+          {/* Controls */}
+          <div className="controls">
+            <div className="speaker">
+              <div className="speaker-line" />
+              <div className="speaker-line" />
+              <div className="speaker-line" />
+              <div className="speaker-line" />
+            </div>
+            <div className="red-button" />
+          </div>
+
+          {/* Green section */}
+          <div className="green-section" />
+
+          {/* Bottom controls */}
+          <div className="bottom-controls">
+            <div className="dpad">
+              <div className="dpad-button dpad-up" />
+              <div className="dpad-button dpad-down" />
+              <div className="dpad-button dpad-left" />
+              <div className="dpad-button dpad-right" />
+              <div className="dpad-button dpad-center" />
+            </div>
+            <div className="action-buttons">
+              <button className="action-button" />
+              <button className="action-button" />
+            </div>
+          </div>
+        </div>
+
+        {/* Hinge */}
+        <div className="hinge" />
+
+        {/* Right Panel */}
+        <div className="right-panel">
+          {/* Right screen with Pokemon data */}
+          <div className="right-screen">
+            {selectedPokemon ? (
+              <div>
+                <h3>{selectedPokemon.name}</h3>
+                <p>Height: {selectedPokemon.height}</p>
+                <p>Weight: {selectedPokemon.weight}</p>
+                <p>Type: {selectedPokemon.types.map(t => t.type.name).join(', ')}</p>
+                <br />
+                <strong>Stats:</strong>
+                {selectedPokemon.stats.map((stat, index) => (
+                  <div key={index}>
+                    <p>
+                      {stat.stat.name}: {stat.base_stat}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No Pokémon selected</p>
+            )}
+          </div>
+
+          {/* Blue grid */}
+          <div className="blue-grid">
+            <div className="grid-cell" />
+            <div className="grid-cell" />
+            <div className="grid-cell" />
+            <div className="grid-cell" />
+            <div className="grid-cell" />
+            <div className="grid-cell" />
+            <div className="grid-cell" />
+            <div className="grid-cell" />
+            <div className="grid-cell" />
+            <div className="grid-cell" />
+          </div>
+
+          {/* Right controls */}
+          <div className="right-controls">
+            <div className="white-buttons">
+              <div className="white-button" />
+              <div className="white-button" />
+            </div>
+            <div className="yellow-button" />
+          </div>
+
+          {/* Bottom green buttons */}
+          <div className="bottom-green-buttons">
+            <div className="green-button" />
+            <div className="green-button" />
+          </div>
+
+          {/* Pokemon List */}
+          <ul className="scroll-list">
             {filteredPokemonList.map((pokemon) => (
-              <li key={pokemon.id} className="pokemon-item">
-                <a href="#" onClick={() => showPokemon(pokemon.url)}>
+              <li key={pokemon.name} className="pokemon-item">
+                <a href="#" onClick={(e) => {
+                  e.preventDefault();
+                  showPokemon(pokemon.url);
+                }}>
                   {pokemon.name}
                 </a>
               </li>
             ))}
           </ul>
         </div>
-      </>
+      </div>
     </div>
   );
 }
