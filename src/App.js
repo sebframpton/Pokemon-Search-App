@@ -48,6 +48,14 @@ function App() {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSearch();
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
       handleSearch();
     }
   };
@@ -99,8 +107,17 @@ function App() {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
             />
-            <button className="search-button" onClick={handleSearch}>
+            <button 
+              className="search-button" 
+              onClick={handleSearch}
+              type="button"
+            >
               Search Pokémon
             </button>
           </div>
