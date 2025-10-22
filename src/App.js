@@ -65,6 +65,34 @@ function App() {
     setSearchTerm("");
   };
 
+  const navigatePokemon = (direction) => {
+    if (!selectedPokemon) {
+      // If no pokemon selected, select the first one
+      if (filteredPokemonList.length > 0) {
+        showPokemon(filteredPokemonList[0].url);
+      }
+      return;
+    }
+
+    // Find current pokemon index in the filtered list
+    const currentIndex = filteredPokemonList.findIndex(
+      (pokemon) => pokemon.name === selectedPokemon.name
+    );
+
+    if (currentIndex === -1) return;
+
+    let nextIndex;
+    if (direction === 'up') {
+      // Go to previous pokemon (wrap around to end if at start)
+      nextIndex = currentIndex > 0 ? currentIndex - 1 : filteredPokemonList.length - 1;
+    } else {
+      // Go to next pokemon (wrap around to start if at end)
+      nextIndex = currentIndex < filteredPokemonList.length - 1 ? currentIndex + 1 : 0;
+    }
+
+    showPokemon(filteredPokemonList[nextIndex].url);
+  };
+
   return (
     <div className="App">
       <header>
@@ -218,8 +246,18 @@ function App() {
 
           {/* Bottom green buttons */}
           <div className="bottom-green-buttons">
-            <div className="green-button" />
-            <div className="green-button" />
+            <div 
+              className="green-button" 
+              onClick={() => navigatePokemon('up')}
+              style={{cursor: 'pointer'}}
+              title="Previous Pokemon"
+            />
+            <div 
+              className="green-button" 
+              onClick={() => navigatePokemon('down')}
+              style={{cursor: 'pointer'}}
+              title="Next Pokemon"
+            />
           </div>
 
           {/* Pokemon List */}
