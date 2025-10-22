@@ -340,6 +340,31 @@ body {
     border: 2px solid #1b5e20;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.green-button:first-child::before {
+    content: '▲';
+}
+
+.green-button:last-child::before {
+    content: '▼';
+}
+
+.green-button:hover {
+    background: linear-gradient(135deg, #5cbf60, #357a37);
+    transform: translateY(-2px);
+}
+
+.green-button:active {
+    transform: translateY(0);
 }
 
 .search-section {
@@ -690,7 +715,15 @@ ul {
     .green-button {
         width: 45px;
         height: 22px;
-        font-size: 10px;
+        font-size: 12px;
+    }
+
+    .green-button:first-child::before {
+        content: '▲';
+    }
+
+    .green-button:last-child::before {
+        content: '▼';
     }
 
     .white-button {
